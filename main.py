@@ -1,6 +1,6 @@
 import bpy
 
-bpy.ops.import_scene.fbx(filepath='1.fbx')
+bpy.ops.import_scene.fbx(filepath='3.fbx')
 
 # 删除Blender默认插入的Cube。
 cube = bpy.data.objects['Cube']
@@ -18,5 +18,8 @@ count = 0
 for mesh in meshes:
     count += 1
 
+    # 在导出之前先选择一个object，然后只导出选择的object。
     mesh.select_set(True)
     bpy.ops.export_scene.fbx(filepath=f'component-{count}.fbx', use_selection=True)
+    # 不要忘记取消选择。
+    mesh.select_set(False)
